@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  cucukakek-leader:
+    image: fahrizalfarid/cucu-kakek
+    container_name: cucukakek-leader
+    command:
+      - "--http=:1081"
+      - "-a=1@127.0.0.1:8081"
+      - "--join=0"
+      - "--secret-key=sEcr3t"
+      - "-c=1@127.0.0.1:8081"
+      - "-c=2@127.0.0.1:8082"
+      - "-c=3@127.0.0.1:8083"
+    ports:
+      - 1081:1081
+      - 8081:8081
+    restart: always
+
+  cucukakek-0:
+    image: fahrizalfarid/cucu-kakek
+    container_name: cucukakek-0
+    command:
+      - "--http=:1082"
+      - "-a=2@127.0.0.1:8082"
+      - "--join=1"
+      - "--secret-key=sEcr3t"
+    ports:
+      - 1082:1082
+      - 8082:8082
+    restart: always
+
+  cucukakek-1:
+    image: fahrizalfarid/cucu-kakek
+    container_name: cucukakek-1
+    command:
+      - "--http=:1083"
+      - "-a=3@127.0.0.1:8083"
+      - "--join=1"
+      - "--secret-key=sEcr3t"
+    ports:
+      - 1083:1083
+      - 8083:8083
+    ports:
+      - 1083:1083
+      - 8083:8083
+    restart: always
